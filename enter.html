@@ -64,7 +64,7 @@
           <h2>Esterior</h2>
 
           <h3>Contours</h3>
-          <p>The first step of the modeling phase was performed by reproducing the contour lines of the model. I am started modeling the lines of one side and then rebuild the opposite side in a symmetrical manner. The lines of junction between the two sides are those relating to the part of the trunk, the roof and the front hood.</p>
+          <p>The first step of the modeling phase was performed by reproducing the contour lines of the model. I started modeling the lines of one side and then rebuild the opposite side in a symmetrical manner. The lines of junction between the two sides are those relating to the part of the trunk, the roof and the front hood.</p>
           <img src="./images/imgModel/sideA.png">
           <p>The lines were created by the function that models <code>Hermite's curves</code>. Some lines have been combined (<code>curves_union function</code>) to allow the modeling of surfaces as is explained later.</p>
           <img src="./images/imgModel/contours.png">
@@ -72,7 +72,7 @@
           <h3>Surfaces</h3>
           <p>The second step was to model the surfaces of the outer parts of the model. This was the most difficult step for the realization.</p>
           <img src="./images/imgModel/surfaces1.png">
-          <p>The first area that I modeled were those related to the lateral area. The difficulty has been the modeling of complex surfaces composed of many contour lines. For these surfaces I used two particular functions of surface modeling in addition to traditional <code>Hermite's surface</code>:
+          <p>The first area that I modeled was those related to the lateral area. The difficulty has been the modeling of complex surfaces composed of many contour lines. For these surfaces I used two particular functions of surface modeling in addition to traditional <code>Hermite's surface</code>:
             <ul type=”circle”>
               <li><strong>Triangolar CoonsPatch (three contour lines)</strong></li>
                    <pre><code>function triangolarCoonsPatch(controlPointsCurve1,controlPointsSup1,controlPointsCurve2){
@@ -96,7 +96,7 @@
           </p>
           <img src="./images/imgModel/surfaces2.png">
           <h4>Door</h4>
-          <p>The doors are made using the modeling of surfaces described above. The glass of the windows and the door is a surface obtained by a ConsPatch. The transparent color is obtained by adding an attribute to the function rgb color for brightness. (<code>rgba</code>)</p>
+          <p>The doors were made using the modeling of surfaces described above. The glass of the windows and the door is a surface obtained by a ConsPatch. The transparent color is obtained by adding an attribute to the function rgb color for brightness. (<code>rgba</code>)</p>
           <img src="./images/imgModel/door.png">
           <br></br>
           <a href="./exterior-boilerplate.html" id="show-interior-model" class="button2"><span>SHOW EXTERIOR DESIGN</span></a>
