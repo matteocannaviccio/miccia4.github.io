@@ -37,28 +37,63 @@
         <section id="main_content">
 
           <h2>Object Description</h2>
-            <img src="./images/fiat500-main.jpg">
             <h3>Fiat 500 an icon of our time</h3>
 
-            <p>Some cars go down in history for their technological or styling innovations. Others deserve to be remembered for the role they have played in the daily life of an entire generation or an entire country. Few succeed in combining the two: technology and sentiment. They leave an indelible mark, becoming a sort of icon of their age.
-            The Nuova 500 is one of these. In a career lasting 18 years, from 1957 to 1975, exactly 3,893,294 were built, and it helped Italians and numerous other Europeans to satisfy a need for individual mobility that began to gain momentum from the early 1950s. The Nuova 500, even more than the 600 (1955), also brought the end of the post-war emergency period for motorisation and the automotive industry in Italy, and the start of the striving for comfort, albeit minimal and economical. </p>
+            <p>Some cars go down in history for their technological or styling innovations. Others deserve to be remembered for the role they have played in the daily life of an entire generation or an entire country. Few succeed in combining the two: technology and sentiment. They leave an indelible mark, becoming a sort of icon of their age. The Nuova 500 is one of these. </p>
+
+              <img src="./images/fiat500-main.jpg">
+
+            <p>In a career lasting 18 years, from 1957 to 1975, exactly 3,893,294 were built, and it helped Italians and numerous other Europeans to satisfy a need for individual mobility that began to gain momentum from the early 1950s. The Nuova 500, even more than the 600 (1955), also brought the end of the post-war emergency period for motorisation and the automotive industry in Italy, and the start of the striving for comfort, albeit minimal and economical. </p>
 
             <p>The Fiat 500 measuring only 2.97 metres (9 feet 9 inches) long, and originally powered by an appropriately sized 479 cc two-cylinder, air-cooled engine, the 500 redefined the term "small car" and is considered one of the first city cars.
             </p>
+          <hr></hr>
 
           <h2>Project</h2>
-           <img src="./images/imgModel/project.jpg">
+          
+          <p> Before starting the modeling phase I performed a study of the proportions using pen and paper. This stage has been set by the "blueprint" of Fiat 500. The purpose of this study was to select the units of appropriate measurement to accurately reproduce the contour lines of the model. </p>
+          <img src="./images/blueprint.jpg">
+          
+          <p> Each point of the pattern is a triple of values ​​corresponding to the coordinates of the 3D model (x, y, z).  One of the difficulties I encountered was to accurately control the three perspectives for each point, initially with regard to lines and then to the surfaces where I used the auxiliary lines to be able to close complex surfaces. </p>
+          <img src="./images/imgModel/project.jpg">
 
-
+          <hr></hr>
+          
           <h2>Hierarchical Decomposition</h2>
-          <h3>Side</h3>
-          <img src="./images/imgModel/sideA.png">
+
           <h3>Contours</h3>
+          <p>The first step of the modeling phase was performed by reproducing the contour lines of the model. I am started modeling the lines of one side and then rebuild the opposite side in a symmetrical manner. The lines of junction between the two sides are those relating to the part of the trunk, the roof and the front hood.</p>
+          <img src="./images/imgModel/sideA.png">
+          <p>The lines were created by the function that models <code>Hermite's curves</code>. Some lines have been combined (<code>curves_union function</code>) to allow the modeling of surfaces as is explained later.</p>
           <img src="./images/imgModel/contours.png">
+
           <h3>Surfaces</h3>
+          <p>The second step was to model the surfaces of the outer parts of the model. This was the most difficult step for the realization.</p>
           <img src="./images/imgModel/surfaces1.png">
+          <p>The first area that I modeled were those related to the lateral area. The difficulty has been the modeling of complex surfaces composed of many contour lines. For these surfaces I used two particular functions of surface modeling in addition to traditional <code>Hermite's surface</code>:
+            <ul type=”circle”>
+              <li><strong>Triangolar CoonsPatch (three contour lines)</strong></li>
+                   <pre><code>function triangolarCoonsPatch(controlPointsCurve1,controlPointsSup1,controlPointsCurve2){
+                      var dom2DTri = TRIANGLE_DOMAIN(32, [[1,0,0],[0,1,0],[0,0,1]]);
+                      var curve1=curveFunction(controlPointsCurve1);
+                      var curve2=curveFunction(controlPointsSup1);
+                      var sup1=CUBIC_HERMITE(S1)(controlPointsCurve2);
+                      return  MAP(TRIANGULAR_COONS_PATCH([curve1,sup1,curve2]))(dom2DTri);
+                    }</code></pre>
+
+              <li><strong>CoonsPatch (four contour lines)</strong></li>
+                    <pre><code>function coonsPatch(controlPointsCurve1,controlPointsCurve2,controlPointsSup1,controlPointsSup2){
+                      var dom2D = PROD1x1([INTERVALS(1)(16),INTERVALS(1)(16)]);
+                      var cP1a=CUBIC_HERMITE(S0)(controlPointsCurve1)
+                      var cP1b=CUBIC_HERMITE(S0)(controlPointsCurve2)
+                      var cP1c=CUBIC_HERMITE(S1)(controlPointsSup1)
+                      var cP1d=CUBIC_HERMITE(S1)(controlPointsSup2)
+                      return MAP(COONS_PATCH([cP1a,cP1b,cP1c,cP1d]))(dom2D);
+                    }</code></pre>
+            </ul>
+          </p>
           <img src="./images/imgModel/surfaces2.png">
-          <img src="./images/imgModel/surfaces3.png">
+
           <h3>Interns</h3>
           <img src="./images/imgModel/interns.png">
           <img src="./images/imgModel/internsInside.png">
@@ -67,44 +102,10 @@
           <h3>Wheel</h3>
           <img src="./images/imgModel/wheel.png">
           <h2>Code Description</h2>
-              <pre><code>$ cd your_repo_root/repo_name
-              $ git fetch origin
-              $ git checkout gh-pages
-              </code></pre>
+          <a href="./500-boilerplate.html" id="show-model" class="button"><span>SHOW MODEL</span></a><br>
           
-
-
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-        </section>
-
         <footer>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+          This page was generated by <a href="mailto:mat.cannaviccio@stud.uniroma3.it">Matteo Cannaviccio</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
         </footer>
 
         
