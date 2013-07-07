@@ -855,7 +855,7 @@ function steeringWheel(){
 
     model=rgb(210,180,140)(STRUCT([externalTorus,internalDisk,sup1,sup2,sup3,sup4,sup5,sup6,sup7,sup8]))
     logo=T([2])([1.49])(STRUCT([rgb(0,0,0)(overInternalDisk),rgb(192,192,192)(logoDisk)]))
-   return R([0,1])([PI/10])(R([0,2])([-PI/2])(STRUCT([model])))
+   return R([0,1])([PI/10])(R([0,2])([-PI/2])(STRUCT([model,logo])))
 }
 
 steeringW=T([0,1,2])([-10.3,14.5,5])(S([0,1,2])([0.6,0.6,0.6])(steeringWheel()))
@@ -871,10 +871,9 @@ interns=STRUCT([sedili,internsSup,steeringW])
 particulars=STRUCT([fari,maniglie,paratargaRetro,paraurtiS])
 
 //================================== MODEL =====================================
-model=STRUCT([sideA,sideB,retro,fronte,sotto,pneumatics,roof,interns,externs,particulars])
+model=STRUCT([sideA,sideB,retro,fronte,sotto,roof,externs])
 DRAW(model)
 //================================== MODEL =====================================
-
 
   });
 </script>
